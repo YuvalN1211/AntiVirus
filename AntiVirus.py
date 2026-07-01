@@ -21,6 +21,7 @@ def get(get_url):
 
 
 def final_print(file_name, file_data):
+    global malicious_count, suspicious_count, clear_count
     stats = file_data["data"]["attributes"]["stats"]
     malicious = stats["malicious"]
     suspicious = stats["suspicious"]
@@ -59,14 +60,16 @@ def scan(file_path, file_name):
     else:
         print(f"{file_name} - status code error: code {status_code}")
     
-
+file_count = 0
 
 def go_over_path(path):
+    global file_count
     name_list = os.listdir(path)
     for name in name_list:
         cur_full_path = os.path.join(path, name)
         
         if os.path.isfile(cur_full_path):
+            file_count += 1
             scan(os.path.relpath(cur_full_path, os.getcwd()), name)
         
         else:
@@ -75,3 +78,5 @@ def go_over_path(path):
 path = input("Enter path:\n")
 
 go_over_path(path)
+
+print(f"SUMMERY: amount of files {file_count}, from them {malicious_count} are malicious, {suspicious_count} are suspicious and {clear_count} are clear")
