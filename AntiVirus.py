@@ -75,7 +75,11 @@ def go_over_path(path):
         else:
             go_over_path(cur_full_path)
 
+<<<<<<< HEAD
 path = input("Enter path: ")
+=======
+path = input("Enter path:\n")
+>>>>>>> 07fc24c45038082d5ff0609ee45ea8548d591cdf
 
 go_over_path(path)
 
